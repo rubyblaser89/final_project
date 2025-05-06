@@ -2,13 +2,48 @@
     <head>
         <title> Pairwise Sequence Alignment </title>
     </head>
+    <style>
+        p {font-size: 40px ;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 2px 2px;
+    }
+        body {background-color: paleturquoise ;}
+    </style>
     <body>
-        <textarea cols="60" rows="20">
-            FASTA Sequence or Accession Number
+        <p> Pairwise Sequence Alignment </p>
+        <form name = 'sequence_alignment' method = 'post' action = 'pairwise_alignment-2.cgi'>
+            <label for="sequence1">Sequence 1:</label><br>
+            <textarea cols="60" rows="20">
+                FASTA Sequence or Accession Number #1
             </textarea>
-            <input type="radio" name="moltype" value="dna" /> DNA
-            <input type="radio" name="moltype" value="protein" />
-            Protein
-            <input type="submit" value="Submit">
+                <input type="radio" name="moltype" value="dna" /> DNA
+                <input type="radio" name="moltype" value="protein" />
+                Protein
+            <label for="sequence2">Sequence 2:</label><br>
+            <textarea cols="60" rows="20">
+                FASTA Sequence or Accession Number #2
+            </textarea>
+                <input type="radio" name="moltype" value="dna" /> DNA
+                <input type="radio" name="moltype" value="protein" />
+                Protein
+                    <input type="submit" value="Submit">
+        </form>
+        <script>
+            const form = document.getElementById('sequence_alignement');
+            form.addEventListener("submit", function(event) {
+                let hasInput = false;
+                const inputs = document.querySelectorAll('input[type="text"], textarea');
+                inputs.forEach(input => {
+                    if (input.value.trim() !=='') {
+                        hasInput = true;
+                    }
+                });
+                if(!hasInput) {
+                    event.preventDefault()
+                    alert("Please Input Sequences or Accession Numbers");
+                }
+            });
+        </script>
     </body>
     </html>
